@@ -1,0 +1,42 @@
+//- using capteur arduino DHT11, a recup lib sur github + arduino UNO
+
+#include <Adafruit_Sensor.h>
+#include <DHT.h>  
+          
+#define DHTPIN A1
+#define DHTTYPE DHT11   
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() 
+{
+  // Initialisation de la connexion série
+  Serial.begin(9600);
+  delay(3000);
+
+  // Petit bienvenue :)
+  Serial.println("Salut");
+  Serial.println("-----");
+}
+
+void loop() 
+{
+  //recuperation de la temperature et de ses valuer sur pin A1
+  double dTempExt = dht.readTemperature();
+
+  Serial.print("Température: ");
+  Serial.print(dTempExt);
+  Serial.println("°C");
+  
+ //recuperation de l'humidité et ses valeurs pin A1
+  double dHumidExt = dht.readHumidity();
+  
+  Serial.print("Humidité: ");
+  Serial.print(dHumidExt);
+  Serial.println("%");
+
+  Serial.println("-----");
+  
+  // 30 avant porchaines valeurs
+  delay(30000);
+}
